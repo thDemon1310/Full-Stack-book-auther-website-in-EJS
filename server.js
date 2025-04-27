@@ -4,7 +4,8 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 import express from "express";
-const app = express(); 
+import bodyParser from "body-parser";
+const app = express();
 const hostname = process.env.HOST;
 const port = process.env.PORT;
 import expressEjsLayouts from "express-ejs-layouts";
@@ -22,6 +23,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("layout", "layouts/layout"); // hookup express layout
 app.use(expressEjsLayouts);
 app.use(express.static("public")); // style, js, images
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 
 import mongoose from "mongoose";
 mongoose.connect(process.env.DATABASE_URL);
