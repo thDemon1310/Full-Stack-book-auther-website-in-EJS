@@ -1,1 +1,10 @@
-<h2>All Auther</h2>
+<h2>Search Auther</h2>
+<form action="/authers" method="get">
+  <label for="">Name</label>
+  <input type="search" name="name" id="" />
+  <button type="submit">Search</button>
+</form>
+<br />
+<% authersList.forEach(element => {%>
+    <div><%= element.name %></div>
+<% }); %>
