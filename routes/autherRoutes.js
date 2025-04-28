@@ -4,9 +4,20 @@ import Auther from "../models/autherModel.js";
 
 // All auther routes
 router.get("/", async (req, res) => {
+  let searchOptions = {};
+  let getQuery = req.query.autherName;
+  // console.log(getQuery)
+  if (getQuery != null && getQuery !== "") {
+    searchOptions.name = new RegExp(getQuery, "i");
+  }
+  // console.log(searchOptions);
+
   try {
-    const dbAutherList = await Auther.find({});
-    res.render("authers/autherIndex", { authersList: dbAutherList });
+    const dbAutherList = await Auther.find(searchOptions);
+    res.render("authers/autherIndex", {
+      authersList: dbAutherList,
+      searchOptions: req.query,
+    });
   } catch (error) {
     console.error(error);
     res.redirect("/");
@@ -26,7 +37,7 @@ router.post("/", async (req, res) => {
   try {
     const newAuther = await auther.save();
     console.log(`The name save to database`);
-    res.redirect("authers");
+    res.redirect("/authers");
     // res.redirect(`authers/${newAuther.id}`)
   } catch {
     res.render("authers/autherNew", {
