@@ -14,6 +14,7 @@ import path from "path";
 // importing routes
 import indexRouter from "./routes/indexRoute.js";
 import autherRoutes from "./routes/autherRoutes.js";
+import bookRoutes from './routes/bookRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +27,7 @@ app.use(express.static("public")); // style, js, images
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 
 import mongoose from "mongoose";
-mongoose.connect(process.env.DATABASE_URL);
+await mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on("error", (error) => {
   console.error(error);
@@ -37,6 +38,7 @@ db.once("open", () => {
 
 app.use("/", indexRouter);
 app.use("/authers", autherRoutes);
+app.use("/books",bookRoutes)
 
 app.listen(port, () => {
   console.log(`The Server is running at http://${hostname}:${port}`);
