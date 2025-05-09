@@ -15,7 +15,7 @@ router.get("/new", async (req, res) => {
     const book = new Book();
     res.render("books/bookNew", {
       authersList: authers,
-      bookList: book,
+      book: book,
     });
   } catch (error) {
     console.error(error);
