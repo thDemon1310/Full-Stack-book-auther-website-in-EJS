@@ -1,0 +1,17 @@
+<label for="">Title:</label>
+<input type="text" name="title" id="" value="<%= bookList.title %>" />
+
+<label for="">Author</label>
+<select name="author" id="">
+  <option selected disabled value="">List of authers</option>
+  <% authersList.forEach(author => { %> <% if (author.id === bookList.author) {
+  %>
+  <option  label="<%= author.name %>"><%= author.id %></option>
+  <% } else { %>
+  <option label="<%= author.name %>"><%= author.id %></option>
+  <% } %> <% }); %>
+</select>
+<label for="">Auther not listed:</label>
+<a href="/authers/new">Add auther</a>
+<br />
+<label for="">Publish Date</label>
