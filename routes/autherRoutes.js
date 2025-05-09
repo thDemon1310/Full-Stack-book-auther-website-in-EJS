@@ -6,12 +6,9 @@ import Auther from "../models/autherModel.js";
 router.get("/", async (req, res) => {
   let searchOptions = {};
   let getQuery = req.query.autherName;
-  // console.log(getQuery)
   if (getQuery != null && getQuery !== "") {
     searchOptions.name = new RegExp(getQuery, "i");
   }
-  // console.log(searchOptions);
-
   try {
     const dbAutherList = await Auther.find(searchOptions);
     res.render("authers/autherIndex", {

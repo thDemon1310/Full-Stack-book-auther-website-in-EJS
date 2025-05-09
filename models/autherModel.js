@@ -4,14 +4,14 @@ import mongoose from "mongoose";
 // in MongoDB and non-sequal database the schema is like the table
 
 // building schema
-const autherData = new mongoose.Schema({
+const autherSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
   },
 });
 
-const autherSchema = mongoose.model("Auther", autherData);
+const autherData = mongoose.model("Auther", autherSchema);
 
 
-export default autherSchema;
+export default autherData;
