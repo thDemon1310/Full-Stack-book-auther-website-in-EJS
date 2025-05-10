@@ -14,7 +14,7 @@ import path from "path";
 // importing routes
 import indexRouter from "./routes/indexRoute.js";
 import autherRoutes from "./routes/autherRoutes.js";
-import bookRoutes from './routes/bookRoutes.js'
+import bookRoutes from "./routes/bookRoutes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,8 +38,9 @@ db.once("open", () => {
 
 app.use("/", indexRouter);
 app.use("/authers", autherRoutes);
-app.use("/books",bookRoutes)
+app.use("/books", bookRoutes);
 
 app.listen(port, () => {
   console.log(`The Server is running at http://${hostname}:${port}`);
 });
+

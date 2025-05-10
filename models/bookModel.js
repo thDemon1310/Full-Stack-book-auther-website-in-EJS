@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+const coverImageBasePath = "uploads/bookCovers";
 const bookSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -39,3 +39,4 @@ const bookSchema = new mongoose.Schema({
 const bookData = mongoose.model("Book", bookSchema);
 
 export default bookData;
+export { coverImageBasePath };
