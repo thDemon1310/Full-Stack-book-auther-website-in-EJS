@@ -23,7 +23,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.set("layout", "layouts/layout"); // hookup express layout
 app.use(expressEjsLayouts);
-app.use(express.static("public")); // style, js, images
+app.use(express.static(path.join(__dirname,"public"))); // style, js, images
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
 
 import mongoose from "mongoose";
