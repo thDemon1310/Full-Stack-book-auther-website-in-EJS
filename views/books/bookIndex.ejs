@@ -1,1 +1,41 @@
-<H1>This is book page</H1>
+<h2>Search Books</h2>
+<form action="/books" method="get">
+  <div>
+    <label for="">Title:</label>
+    <input
+      type="search"
+      name="bookTitle"
+      id="bookTitle"
+      value="<%=searchOptions.title%>"
+    />
+  </div>
+  <div>
+    <label for="">Published Before:</label>
+    <input
+      type="date"
+      name="publishedBefore"
+      id="publishedBefore"
+      value="<%=searchOptions.publishedBefore%>"
+    />
+  </div>
+  <div>
+    <label for="">Published After:</label>
+    <input
+      type="date"
+      name="publishedAfter"
+      id="publishedAfter"
+      value="<%=searchOptions.publishedAfter%>"
+    />
+  </div>
+</form>
+<br />
+<div>
+  <% booksList.forEach(book => {%>
+  <img
+    height="150"
+    width="90"
+    alt="Book Cover"
+    src="<%= book.coverImagePath %>"
+  />
+  <% }); %>
+</div>

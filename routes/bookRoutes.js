@@ -19,7 +19,16 @@ const uplode = multer({
 });
 // All book routes
 router.get("/", async (req, res) => {
-  res.render("books/bookIndex");
+  try {
+    const dbBookList = await Book.find({})
+    res.render("books/bookIndex", {
+      booksList: dbBookList,
+      searchOptions: req.query,
+    });
+  } catch (error) {
+    console.error(error);
+    res.redirect("/")
+  }
 });
 
 // New Book routes
