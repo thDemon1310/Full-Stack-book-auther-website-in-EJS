@@ -26,6 +26,12 @@ router.get("/", async (req, res) => {
       new RegExp(req.query.bookTitle, "i")
     );
   }
+  if (req.query.publishedBefore != null && req.query.publishedBefore != "") {
+    searchQuery = searchQuery.lte('publishDate',req.query.publishedBefore)
+  }
+  if (req.query.publishedAfter != null && req.query.publishedAfter != "") {
+    searchQuery = searchQuery.gte('publishDate',req.query.publishedAfter)
+  }
 
   try {
     const dbBookList = await searchQuery.exec(); //Book.find({});
