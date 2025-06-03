@@ -6,7 +6,7 @@
       type="search"
       name="bookTitle"
       id="bookTitle"
-      value="<%=searchOptions.title%>"
+      value="<%=searchOptions.bookTitle%>"
     />
   </div>
   <div>
@@ -27,6 +27,9 @@
       value="<%=searchOptions.publishedAfter%>"
     />
   </div>
+  <div>
+    <input type="submit" value="Search">
+  </div>
 </form>
 <br />
 <div>
@@ -36,6 +39,6 @@
     width="90"
     alt="Book Cover"
     src="<%= book.coverImagePath %>"
-  />
+  />&nbsp&nbsp&nbsp
   <% }); %>
 </div>

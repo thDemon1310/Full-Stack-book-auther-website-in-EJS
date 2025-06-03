@@ -19,15 +19,23 @@ const uplode = multer({
 });
 // All book routes
 router.get("/", async (req, res) => {
+  let searchQuery = Book.find(); // If we dont execute any method this will return  a object which can you to develop a query we will build it by using request query
+  if (req.query.bookTitle != null && req.query.bookTitle != "") {
+    searchQuery = searchQuery.regex(
+      "title",
+      new RegExp(req.query.bookTitle, "i")
+    );
+  }
+
   try {
-    const dbBookList = await Book.find({})
+    const dbBookList = await searchQuery.exec(); //Book.find({});
     res.render("books/bookIndex", {
       booksList: dbBookList,
       searchOptions: req.query,
     });
   } catch (error) {
     console.error(error);
-    res.redirect("/")
+    res.redirect("/");
   }
 });
 
