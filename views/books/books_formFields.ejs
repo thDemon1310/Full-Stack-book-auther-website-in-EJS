@@ -7,8 +7,7 @@
   <label for="">Author</label>
   <select name="author" id="">
     <option selected disabled value="">List of authers</option>
-    <% authersList.forEach(author => { %> 
-    <% if (author.id === book.author) {%>
+    <% authersList.forEach(author => { %> <% if (author.id === book.author) {%>
     <option label="<%= author.name %>"><%= author.id %></option>
     <% } else { %>
     <option label="<%= author.name %>"><%= author.id %></option>
@@ -24,21 +23,27 @@
     type="date"
     name="publishDate"
     id=""
-    value="<%book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0]%> "
+    value="<%= book.publishDate ? book.publishDate.toISOString().split('T')[0] : '' %>"
   />
 </div>
 
 <div>
   <label for="">Page Count:</label>
-  <input type="number" name="pageCount" id="" value="<%book.pageCount%>" min="1">
+  <input
+    type="number"
+    name="pageCount"
+    id=""
+    value="<%book.pageCount%>"
+    min="1"
+  />
 </div>
 
 <div>
   <label for="">Cover:</label>
-  <input type="file" name="cover" id="">
+  <input type="file" class="filepond" name="cover" id="" />
 </div>
 
 <div>
   <label for="">Description:</label>
-  <textarea name="description" id="" ><% book.description %></textarea>
+  <textarea name="description" id=""><% book.description %></textarea>
 </div>
