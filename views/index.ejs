@@ -1,1 +1,10 @@
-<strong>Hi my name is Utplaskh</strong>
+<h2>Recently Added</h2>
+<div>
+  <% booksList.forEach(book => {%>
+  <img
+    height="150"
+    width="90"
+    alt="Book Cover"
+    src="<%= book.coverImagePath %>"
+  />&nbsp&nbsp&nbsp <% }); %>
+</div>
