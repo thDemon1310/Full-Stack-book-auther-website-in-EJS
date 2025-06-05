@@ -1,13 +1,12 @@
 import express from "express";
 import path from "path";
 import fs from "fs/promises";
-import Book, { coverImageBasePath } from "../models/bookModel.js";
+import bookData from "../models/bookModel.js";
 import Auther from "../models/autherModel.js";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const uploadPath = path.join(__dirname, "../public", coverImageBasePath);
 const router = express.Router();
 
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
