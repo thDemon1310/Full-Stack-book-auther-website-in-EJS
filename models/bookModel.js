@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { type } from "os";
 import path from "path";
 const coverImageBasePath = "uploads/bookCovers";
 const bookSchema = new mongoose.Schema({
@@ -22,13 +23,17 @@ const bookSchema = new mongoose.Schema({
     required: true,
     default: Date.now,
   },
-  coverImageName: {
-    type: String,
+  coverImage: {
+    type: Buffer,
     required: true,
     // insted of passing a image into the data base
     // we will pass Name of the image to DB
     // and we will store image (file) to filesystem of the server
     // imp-> Always want to store files into filesystem when you can
+  },
+  coverImageType: {
+    type: String,
+    required: true,
   },
   auther: {
     // We want to reference auther form the autherModel collection
