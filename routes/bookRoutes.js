@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import fs from "fs/promises";
 import Book from "../models/bookModel.js";
 import Auther from "../models/autherModel.js";
 import { fileURLToPath } from "url";
@@ -10,16 +9,11 @@ const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 const imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
-// const uplode = multer({
-//   dest: uploadPath,
-//   fileFilter: (req, file, callback) => {
-//     callback(null, imageMimeTypes.includes(file.mimetype));
-//   },
-// });
+
 
 // All book routes
 router.get("/", async (req, res) => {
-  let searchQuery = Book.find(); // If we dont execute any method this will return  a object which can you to develop a query we will build it by using request query
+  let searchQuery = Book.find();
   if (req.query.bookTitle != null && req.query.bookTitle != "") {
     searchQuery = searchQuery.regex(
       "title",
@@ -63,6 +57,7 @@ router.post("/", async (req, res) => {
   try {
     const newBook = await book.save();
     // res.redirect(`books\\${newBook.id}`)
+    console.log(`Book info saved to DB`)
     res.redirect("books");
   } catch (error) {
     console.error(error);
@@ -91,7 +86,7 @@ const saveCover = async (book, encodedCover) => {
   const cover = await JSON.parse(encodedCover);
   if (cover != null && imageMimeTypes.includes(cover.type)) {
     book.coverImage = new Buffer.from(cover.data, "base64");
-    book.coverImageType= cover.type
+    book.coverImageType = cover.type;
   }
 };
 
