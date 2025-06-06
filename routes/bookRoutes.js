@@ -1,7 +1,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs/promises";
-import bookData from "../models/bookModel.js";
+import Book from "../models/bookModel.js";
 import Auther from "../models/autherModel.js";
 import { fileURLToPath } from "url";
 
@@ -59,7 +59,7 @@ router.post("/", async (req, res) => {
     pageCount: req.body.pageCount,
     description: req.body.description,
   });
-  saveCover(book, req.body.cover);
+  await saveCover(book, req.body.cover);
   try {
     const newBook = await book.save();
     // res.redirect(`books\\${newBook.id}`)
@@ -94,4 +94,5 @@ const saveCover = async (book, encodedCover) => {
     book.coverImageType= cover.type
   }
 };
+
 export default router;

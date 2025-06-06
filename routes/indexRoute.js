@@ -1,5 +1,5 @@
 import express from "express";
-import Book, { coverImageBasePath } from "../models/bookModel.js";
+import Book from "../models/bookModel.js";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
