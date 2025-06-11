@@ -44,4 +44,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:id", (req, res) => {
+  res.send(`Show Auther ${req.params.id}`);
+});
+
+router.get("/:id/edit", (req, res) => {
+  res.send(`Edit Auther ${req.params.id}`);
+});
+
+router.put("/:id", (req, res) => {
+  res.send(`Update Auther ${req.params.id}`);
+});
+
+router.delete("/:id", (req, res) => {
+  res.send(`Delete Auther ${req.params.id}`);
+});
 export default router;
