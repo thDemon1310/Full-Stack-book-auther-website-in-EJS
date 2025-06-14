@@ -34,8 +34,7 @@ router.post("/", async (req, res) => {
   try {
     const newAuther = await auther.save();
     console.log(`The name save to database`);
-    res.redirect("/authers");
-    // res.redirect(`authers/${newAuther.id}`)
+    res.redirect(`authers/${newAuther.id}`);
   } catch {
     res.render("authers/autherNew", {
       auther: auther,
@@ -43,20 +42,56 @@ router.post("/", async (req, res) => {
     });
   }
 });
+0;
 
 router.get("/:id", (req, res) => {
   res.send(`Show Auther ${req.params.id}`);
 });
 
-router.get("/:id/edit", (req, res) => {
-  res.send(`Edit Auther ${req.params.id}`);
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const auther = await Auther.findById(req.params.id);
+    res.render("authers/autherEdit", { auther: auther });
+  } catch (error) {
+    res.redirect("/authers");
+  }
 });
 
-router.put("/:id", (req, res) => {
-  res.send(`Update Auther ${req.params.id}`);
+router.put("/:id", async (req, res) => {
+  let auther;
+  try {
+    auther = await Auther.findById(req.params.id);
+    auther.name = req.body.name;
+    await auther.save();
+    console.log(`The name updated to database`);
+    res.redirect(`/authers/${auther.id}`);
+  } catch {
+    if (auther == null) {
+      res.redirect("/");
+    } else {
+      res.render("authers/autherEdit", {
+        auther: auther,
+        errorMessage: "Error Updating Auther",
+      });
+    }
+  }
 });
 
-router.delete("/:id", (req, res) => {
-  res.send(`Delete Auther ${req.params.id}`);
+router.delete("/:id", async (req, res) => {
+  let auther;
+  try {
+    auther = await Auther.findById(req.params.id);
+    await auther.deleteOne();
+    console.log(`The name deleted to database`);
+    res.redirect(`/authers`);
+  } catch (error) {
+    if (auther == null) {
+      res.redirect("/");
+    } else {
+      console.log(error)
+      res.redirect(`/authers/${auther.id}`)
+
+    }
+  }
 });
 export default router;

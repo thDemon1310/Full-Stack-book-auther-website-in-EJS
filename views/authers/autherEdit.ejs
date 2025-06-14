@@ -1,0 +1,6 @@
+<h2>Edit Auther</h2>
+<form action="/authers/<%= auther.id%>?_method=PUT" method="post">
+  <%- include('./auther_formFields.ejs')%>
+  <a href="/authers/<%= auther.id %>">Cancel</a>
+  <button type="submit">Update</button>
+</form>
