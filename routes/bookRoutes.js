@@ -8,8 +8,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const router = express.Router();
 
-const imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/jpg"];
-
+const imageMimeTypes = [
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/jpg",
+  "image/webp",
+];
 
 // All book routes
 router.get("/", async (req, res) => {
@@ -57,7 +62,7 @@ router.post("/", async (req, res) => {
   try {
     const newBook = await book.save();
     // res.redirect(`books\\${newBook.id}`)
-    console.log(`Book info saved to DB`)
+    console.log(`Book info saved to DB`);
     res.redirect("books");
   } catch (error) {
     console.error(error);
