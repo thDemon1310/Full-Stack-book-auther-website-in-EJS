@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import Auther from "../models/autherModel.js";
+import Book from "../models/bookModel.js";
 
 // All auther routes
 router.get("/", async (req, res) => {
@@ -44,8 +45,18 @@ router.post("/", async (req, res) => {
 });
 0;
 
-router.get("/:id", (req, res) => {
-  res.send(`Show Auther ${req.params.id}`);
+router.get("/:id", async (req, res) => {
+  try {
+    const auther = await Auther.findById(req.params.id);
+    const books = await Book.find({ auther: auther.id }).limit(6).exec();
+    res.render("authers/autherShow", {
+      autherData: auther,
+      booksByAuther: books,
+    });
+  } catch (err) {
+    console.error(err);
+    res.redirect("/authers");
+  }
 });
 
 router.get("/:id/edit", async (req, res) => {
