@@ -70,6 +70,17 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id).populate("auther").exec();
+    res.render("books/bookShow.ejs", {
+      bookData: book,
+    });
+  } catch (error) {
+    res.redirect("/");
+  }
+});
+
 const renderNewPage = async (res, book) => {
   try {
     const authers = await Auther.find({});

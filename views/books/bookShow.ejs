@@ -1,0 +1,31 @@
+<h2><%= bookData.title %></h2>
+<div>
+  <div class="image">
+    <img
+      src="<%= bookData.coverImagePath %>"
+      height="200"
+      width="120"
+      alt="Book Cover"
+    />
+  </div>
+  <div>
+    <table>
+      <tr>
+        <td><h3>Auther:</h3></td>
+        <td><%= bookData.auther.name %></td>
+      </tr>
+      <tr>
+        <td><h3>Publish Date:</h3></td>
+        <td><%= bookData.publishDate.toDateString() %></td>
+      </tr>
+      <tr>
+        <td><h3>Page Count:</h3></td>
+        <td><%= bookData.pageCount %></td>
+      </tr>
+      <tr>
+        <td><h3>Description:</h3></td>
+        <td><%= bookData.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>

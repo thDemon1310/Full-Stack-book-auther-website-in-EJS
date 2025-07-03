@@ -1,0 +1,11 @@
+<div>
+  <% booksList.forEach(book => {%>
+  <a href="/books/<%= book._id %>">
+    <img
+      height="150"
+      width="90"
+      alt="Book Cover"
+      src="<%= book.coverImagePath %>"
+    />&nbsp&nbsp&nbsp <% }); %>
+  </a>
+</div>

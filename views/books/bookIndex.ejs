@@ -28,17 +28,8 @@
     />
   </div>
   <div>
-    <input type="submit" value="Search">
+    <input type="submit" value="Search" />
   </div>
 </form>
 <br />
-<div>
-  <% booksList.forEach(book => {%>
-  <img
-    height="150"
-    width="90"
-    alt="Book Cover"
-    src="<%= book.coverImagePath %>"
-  />&nbsp&nbsp&nbsp
-  <% }); %>
-</div>
+<%- include('../partials/bookListShow.ejs') %>
