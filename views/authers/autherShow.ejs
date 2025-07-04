@@ -2,13 +2,6 @@
 <a href="/authers/<%= autherData.id  %>/edit">Edit</a>
 <%- include('../partials/deleteForm.ejs', {url:`/authers/${autherData.id}`}) %>
 <% if (booksByAuther.length > 0) { %>
-    <h2>Books by auther</h2>
-    <% booksByAuther.forEach(book => { %>
-        <img
-        src="<%= book.coverImagePath %>"
-        height="150"
-        width="90"
-        alt="Book Cover"
-        />&nbsp;&nbsp;&nbsp; 
-    <% }) %> 
-<% } %>
+<h2>Books by auther</h2>
+<%- include('../partials/bookListShow.ejs',{booksList: booksByAuther}) %> <% }
+%>
