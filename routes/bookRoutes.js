@@ -61,15 +61,15 @@ router.post("/", async (req, res) => {
   await saveCover(book, req.body.cover);
   try {
     const newBook = await book.save();
-    // res.redirect(`books\\${newBook.id}`)
+    res.redirect(`books/${newBook.id}`);
     console.log(`Book info saved to DB`);
-    res.redirect("books");
   } catch (error) {
     console.error(error);
     await renderNewPage(res, book);
   }
 });
 
+//Show Book by id route
 router.get("/:id", async (req, res) => {
   try {
     const book = await Book.findById(req.params.id).populate("auther").exec();
@@ -81,14 +81,37 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Edit the book by id route
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const book = await Book.findById(req.params.id);
+    renderEditPage(res, book);
+  } catch (err) {}
+});
+
+// PUT methout for edit route
+router.put("/:id", async (req, res) => {
+ res.send("Hello")
+});
+
+// =======Functions========
+
 const renderNewPage = async (res, book) => {
+  renderFormPage(res, book, "New");
+};
+
+const renderEditPage = async (res, book) => {
+  renderFormPage(res, book, "Edit");
+};
+
+const renderFormPage = async (res, book, formType) => {
   try {
     const authers = await Auther.find({});
     const params = {
       authersList: authers,
       book: book,
     };
-    res.render("books/bookNew", params);
+    res.render(`books/book${formType}`, params);
   } catch (error) {
     console.error(error);
     res.redirect("/books");

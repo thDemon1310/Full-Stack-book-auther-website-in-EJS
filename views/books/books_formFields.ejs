@@ -33,7 +33,7 @@
     type="number"
     name="pageCount"
     id=""
-    value="<%book.pageCount%>"
+    value="<%=book.pageCount%>"
     min="1"
   />
 </div>
@@ -45,5 +45,5 @@
 
 <div>
   <label for="">Description:</label>
-  <textarea name="description" id="" value="<% book.description %>"></textarea>
+  <textarea name="description" id=""><%=book.description %></textarea>
 </div>
