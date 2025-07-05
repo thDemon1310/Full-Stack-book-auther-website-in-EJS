@@ -7,10 +7,11 @@ router.get("/", async (req, res) => {
   try {
     dbBookList = await Book.find({})
       .sort({ createdAt: "descending" })
-      .limit(10).exec();
+      .limit(10)
+      .exec();
   } catch (error) {
     console.error(error);
-    dbBookList = []
+    dbBookList = [];
   }
   res.render("index", {
     booksList: dbBookList,

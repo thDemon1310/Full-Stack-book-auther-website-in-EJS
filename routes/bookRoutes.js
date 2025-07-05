@@ -3,6 +3,7 @@ import path from "path";
 import Book from "../models/bookModel.js";
 import Auther from "../models/autherModel.js";
 import { fileURLToPath } from "url";
+import { url } from "inspector";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -109,9 +110,27 @@ router.put("/:id", async (req, res) => {
     await book.save();
     res.redirect(`/books/${book.id}`);
   } catch (err) {
-    console.log(err)
     if (book != null) {
       renderEditPage(res, book);
+    } else {
+      res.redirect("/");
+    }
+  }
+});
+
+// DELETE Route for deleting the book by ID
+router.delete("/:id", async (req, res) => {
+  let book;
+  try {
+    book = await Book.findById(req.params.id);
+    await book.deleteOne();
+    res.redirect("/books");
+  } catch (error) {
+    if (book != null) {
+      res.render("books/bookShow", {
+        book: book,
+        errorMessage: `Could not delete the book`,
+      });
     } else {
       res.redirect("/");
     }

@@ -99,7 +99,6 @@ router.delete("/:id", async (req, res) => {
     if (auther == null) {
       res.redirect("/");
     } else {
-      console.log(error);
       res.redirect(`/authers/${auther.id}`);
     }
   }
