@@ -86,12 +86,36 @@ router.get("/:id/edit", async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
     renderEditPage(res, book);
-  } catch (err) {}
+  } catch (err) {
+    res.redirect("/");
+  }
 });
 
 // PUT methout for edit route
 router.put("/:id", async (req, res) => {
- res.send("Hello")
+  let book;
+  try {
+    book = await Book.findById(req.params.id);
+    {
+      book.title = req.body.title;
+      book.auther = req.body.author;
+      book.publishDate = new Date(req.body.publishDate);
+      book.pageCount = req.body.pageCount;
+      book.description = req.body.description;
+    }
+    if (req.body.cover != null && req.body.cover !== "") {
+      await saveCover(book, req.body.cover);
+    }
+    await book.save();
+    res.redirect(`/books/${book.id}`);
+  } catch (err) {
+    console.log(err)
+    if (book != null) {
+      renderEditPage(res, book);
+    } else {
+      res.redirect("/");
+    }
+  }
 });
 
 // =======Functions========
