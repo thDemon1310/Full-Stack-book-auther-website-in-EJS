@@ -1,0 +1,30 @@
+:root {
+  --header-height: 55px;
+  --logo-font-size: 45px;
+  --gap-bwt-links: 30px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: var(--header-height);
+}
+
+.logo {
+  font-size: var(--logo-font-size);
+  transition: font-size 200ms;
+}
+.logo:hover {
+  font-size: calc(var(--logo-font-size) + 2px);
+}
+
+.header-nav ul {
+  display: flex;
+  gap: var(--gap-bwt-links);
+}
+
+.header-link {
+  list-style: none;
+}
