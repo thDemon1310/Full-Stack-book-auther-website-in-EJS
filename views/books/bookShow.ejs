@@ -29,8 +29,10 @@
     </table>
   </div>
 </div>
-<div>
-  <a href="/books/<%= bookData.id %>/edit">Edit</a>
+<div class="btn-row">
+  <a href="/books/<%= bookData.id %>/edit" class="btn btn-primary">Edit</a>
   <%- include('../partials/deleteForm.ejs',{url:`/books/${bookData.id}`}) %>
-  <a href="/authers/<%= bookData.auther.id %>/">View Author</a>
+  <a href="/authers/<%= bookData.auther.id %>/" class="btn btn-primary"
+    >View Author</a
+  >
 </div>

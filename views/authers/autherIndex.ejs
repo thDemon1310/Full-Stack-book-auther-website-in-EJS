@@ -7,14 +7,16 @@
     id="autherName"
     value="<%= searchOptions.autherName%>"
   />
-  <button type="submit">Search</button>
+  <button type="submit" class="btn">Search</button>
 </form>
 <br />
 <% authersList.forEach(auther => {%>
-<div>
+<div id="added_auther">
   <div><%= auther.name %></div>
-  <a href="/authers/<%= auther.id %>">View</a>
-  <a href="/authers/<%= auther.id %>/edit">Edit</a>
-  <%- include('../partials/deleteForm.ejs', {url:`/authers/${auther.id}`}) %>
+  <div class="btn-row">
+    <a href="/authers/<%= auther.id %>" class="btn btn-primary">View</a>
+    <a href="/authers/<%= auther.id %>/edit" class="btn btn-primary">Edit</a>
+    <%- include('../partials/deleteForm.ejs', {url:`/authers/${auther.id}`}) %>
+  </div>
 </div>
 <% }); %>
