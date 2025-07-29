@@ -1,19 +1,25 @@
 <h2>Search Auther</h2>
 <form action="/authers" method="get">
-  <label for="autherName">Name</label>
-  <input
-    type="search"
-    name="autherName"
-    id="autherName"
-    value="<%= searchOptions.autherName%>"
-  />
-  <button type="submit" class="btn">Search</button>
+  <div class="form-row">
+    <div class="form-item">
+      <label for="autherName">Name</label>
+      <input
+        type="search"
+        name="autherName"
+        id="autherName"
+        value="<%= searchOptions.autherName%>"
+      />
+    </div>
+  </div>
+  <div class="form-row form-row-end">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
 </form>
 <br />
 <% authersList.forEach(auther => {%>
 <div id="added_auther">
-  <div><%= auther.name %></div>
-  <div class="btn-row">
+  <div><h2><%= auther.name %></h2></div>
+  <div class="btn-row form-row form-row-end">
     <a href="/authers/<%= auther.id %>" class="btn btn-primary">View</a>
     <a href="/authers/<%= auther.id %>/edit" class="btn btn-primary">Edit</a>
     <%- include('../partials/deleteForm.ejs', {url:`/authers/${auther.id}`}) %>

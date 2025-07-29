@@ -1,6 +1,8 @@
 <h2>New Auther</h2>
 <form action="/authers" method="post">
   <%- include('./auther_formFields.ejs')%>
-  <a href="/authers">Cancel</a>
-  <button type="submit">Create</button>
+  <div class="form-row form-row-end btn-row">
+    <a class="btn btn-danger" href="/authers">Cancel</a>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </div>
 </form>
