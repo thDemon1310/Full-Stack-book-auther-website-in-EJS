@@ -65,7 +65,6 @@ router.post("/", async (req, res) => {
     res.redirect(`books/${newBook.id}`);
     console.log(`Book info saved to DB`);
   } catch (error) {
-    console.error(error);
     await renderNewPage(res, book);
   }
 });
@@ -153,6 +152,7 @@ const renderFormPage = async (res, book, formType) => {
     const params = {
       authersList: authers,
       book: book,
+      
     };
     res.render(`books/book${formType}`, params);
   } catch (error) {
@@ -161,14 +161,18 @@ const renderFormPage = async (res, book, formType) => {
   }
 };
 
-const saveCover = async (book, encodedCover) => {
-  if (encodedCover == null) {
-    return;
-  }
-  const cover = await JSON.parse(encodedCover);
-  if (cover != null && imageMimeTypes.includes(cover.type)) {
-    book.coverImage = new Buffer.from(cover.data, "base64");
-    book.coverImageType = cover.type;
+const saveCover = (book, encodedCover) => {
+  if (!encodedCover) return;
+
+  try {
+    const cover = JSON.parse(encodedCover);
+    if (cover && imageMimeTypes.includes(cover.type)) {
+      book.coverImage = Buffer.from(cover.data, "base64");
+      book.coverImageType = cover.type;
+    }
+  } catch (err) {
+    console.error("Failed to parse cover JSON:", err.message);
+    // You can choose to rethrow or silently fail depending on your UX preference
   }
 };
 

@@ -1,38 +1,46 @@
 <h2><%= bookData.title %></h2>
-<div>
-  <div class="image">
-    <img
-      src="<%= bookData.coverImagePath %>"
-      height="200"
-      width="120"
-      alt="Book Cover"
-    />
-  </div>
+<div class="show_book">
   <div>
-    <table>
-      <tr>
-        <td><h3>Auther:</h3></td>
-        <td><%= bookData.auther.name %></td>
-      </tr>
-      <tr>
-        <td><h3>Publish Date:</h3></td>
-        <td><%= bookData.publishDate.toDateString() %></td>
-      </tr>
-      <tr>
-        <td><h3>Page Count:</h3></td>
-        <td><%= bookData.pageCount %></td>
-      </tr>
-      <tr>
-        <td><h3>Description:</h3></td>
-        <td><%= bookData.description %></td>
-      </tr>
-    </table>
+    <div class="image">
+      <img
+        src="<%= bookData.coverImagePath %>"
+        height="400"
+        width="250"
+        alt="Book Cover"
+      />
+    </div>
+    <div class="book-prnt">
+      <div class="book-btn">
+        <a href="/books/<%= bookData.id %>/edit" class="btn btn-primary">
+          Edit
+        </a>
+        <%- include('../partials/deleteForm.ejs',{url:`/books/${bookData.id}`})
+        %>
+      </div>
+      <div class="book-delete">
+        <a href="/authers/<%= bookData.auther.id %>/" class="btn btn-primary">
+          View Author
+        </a>
+      </div>
+    </div>
   </div>
-</div>
-<div class="btn-row">
-  <a href="/books/<%= bookData.id %>/edit" class="btn btn-primary">Edit</a>
-  <%- include('../partials/deleteForm.ejs',{url:`/books/${bookData.id}`}) %>
-  <a href="/authers/<%= bookData.auther.id %>/" class="btn btn-primary"
-    >View Author</a
-  >
+
+  <div class="book-card">
+    <div class="book-info">
+      <h3>Author:</h3>
+      <div class="info-value"><%= bookData.auther.name %></div>
+    </div>
+    <div class="book-info">
+      <h3>Publish Date:</h3>
+      <div class="info-value"><%= bookData.publishDate.toDateString() %></div>
+    </div>
+    <div class="book-info">
+      <h3>Page Count:</h3>
+      <div class="info-value"><%= bookData.pageCount %></div>
+    </div>
+    <div class="book-info">
+      <h3>Description:</h3>
+      <div class="info-value"><%= bookData.description %></div>
+    </div>
+  </div>
 </div>
